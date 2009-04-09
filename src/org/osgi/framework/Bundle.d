@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-module org.eclipse.osgi.framework.Bundle;
+module org.osgi.framework.Bundle;
 
 import java.lang.all;
 
