@@ -10,7 +10,7 @@
  * Port to the D programming language:
  *     Frank Benoit <benoit@tionex.de>
  *******************************************************************************/
-module org.osgi.util.NLS;
+module org.eclipse.osgi.util.NLS;
 
 import java.lang.all;
 
