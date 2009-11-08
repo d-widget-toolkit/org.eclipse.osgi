@@ -1,8 +1,8 @@
 /*
  * $Header: /cvshome/build/org.osgi.framework/src/org/osgi/framework/BundleListener.java,v 1.13 2007/02/21 16:49:05 hargrave Exp $
- * 
+ *
  * Copyright (c) OSGi Alliance (2000, 2007). All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,10 +16,14 @@
  * limitations under the License.
  */
 
+// Port to the D programming language:
+//     Frank Benoit <benoit@tionex.de>
 module org.osgi.framework.BundleListener;
-import org.osgi.framework.BundleEvent;
 
 import java.lang.all;
+
+import org.osgi.framework.BundleEvent; // packageimport
+
 import java.util.EventListener;
 
 /**
@@ -35,7 +39,7 @@ import java.util.EventListener;
  * <code>BundleListener</code>s are called with a <code>BundleEvent</code>
  * object when a bundle has been installed, resolved, started, stopped, updated,
  * unresolved, or uninstalled.
- * 
+ *
  * @see BundleEvent
  * @NotThreadSafe
  * @version $Revision: 1.13 $
@@ -44,7 +48,7 @@ import java.util.EventListener;
 public interface BundleListener : EventListener {
     /**
      * Receives notification that a bundle has had a lifecycle change.
-     * 
+     *
      * @param event The <code>BundleEvent</code>.
      */
     public void bundleChanged(BundleEvent event);

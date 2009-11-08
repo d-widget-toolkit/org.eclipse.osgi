@@ -1,8 +1,8 @@
 /*
  * $Header: /cvshome/build/org.osgi.framework/src/org/osgi/framework/ServiceEvent.java,v 1.15 2007/02/20 00:14:12 hargrave Exp $
- * 
+ *
  * Copyright (c) OSGi Alliance (2000, 2007). All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,10 +16,14 @@
  * limitations under the License.
  */
 
+// Port to the D programming language:
+//     Frank Benoit <benoit@tionex.de>
 module org.osgi.framework.ServiceEvent;
-import org.osgi.framework.ServiceReference;
 
-import java.lang.util;
+import java.lang.all;
+
+import org.osgi.framework.ServiceReference; // packageimport
+
 import java.util.EventObject;
 
 /**
@@ -29,10 +33,10 @@ import java.util.EventObject;
  * <code>ServiceListener</code>s and <code>AllServiceListener</code>s when
  * a change occurs in this service's lifecycle. A type code is used to identify
  * the event type for future extendability.
- * 
+ *
  * <p>
  * OSGi Alliance reserves the right to extend the set of types.
- * 
+ *
  * @Immutable
  * @see ServiceListener
  * @see AllServiceListener
@@ -56,10 +60,10 @@ public class ServiceEvent : EventObject {
      * <p>
      * This event is synchronously delivered <strong>after</strong> the service
      * has been registered with the Framework.
-     * 
+     *
      * <p>
      * The value of <code>REGISTERED</code> is 0x00000001.
-     * 
+     *
      * @see BundleContext#registerService(String[],Object,java.util.Dictionary)
      */
     public final static int         REGISTERED          = 0x00000001;
@@ -69,10 +73,10 @@ public class ServiceEvent : EventObject {
      * <p>
      * This event is synchronously delivered <strong>after</strong> the service
      * properties have been modified.
-     * 
+     *
      * <p>
      * The value of <code>MODIFIED</code> is 0x00000002.
-     * 
+     *
      * @see ServiceRegistration#setProperties
      */
     public final static int         MODIFIED            = 0x00000002;
@@ -82,17 +86,17 @@ public class ServiceEvent : EventObject {
      * <p>
      * This event is synchronously delivered <strong>before</strong> the
      * service has completed unregistering.
-     * 
+     *
      * <p>
      * If a bundle is using a service that is <code>UNREGISTERING</code>, the
      * bundle should release its use of the service when it receives this event.
      * If the bundle does not release its use of the service when it receives
      * this event, the Framework will automatically release the bundle's use of
      * the service while completing the service unregistration operation.
-     * 
+     *
      * <p>
      * The value of UNREGISTERING is 0x00000004.
-     * 
+     *
      * @see ServiceRegistration#unregister
      * @see BundleContext#ungetService
      */
@@ -100,13 +104,13 @@ public class ServiceEvent : EventObject {
 
     /**
      * Creates a new service event object.
-     * 
+     *
      * @param type The event type.
      * @param reference A <code>ServiceReference</code> object to the service
      *        that had a lifecycle change.
      */
     public this(int type, ServiceReference reference) {
-        super(cast(Object)reference);
+        super(reference);
         this.reference = reference;
         this.type = type;
     }
@@ -116,7 +120,7 @@ public class ServiceEvent : EventObject {
      * lifecycle.
      * <p>
      * This reference is the source of the event.
-     * 
+     *
      * @return Reference to the service that had a lifecycle change.
      */
     public ServiceReference getServiceReference() {
@@ -130,7 +134,7 @@ public class ServiceEvent : EventObject {
      * <li>{@link #MODIFIED}
      * <li>{@link #UNREGISTERING}
      * </ul>
-     * 
+     *
      * @return Type of service lifecycle change.
      */
 

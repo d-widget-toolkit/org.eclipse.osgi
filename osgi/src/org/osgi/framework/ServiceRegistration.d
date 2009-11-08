@@ -1,8 +1,8 @@
 /*
  * $Header: /cvshome/build/org.osgi.framework/src/org/osgi/framework/ServiceRegistration.java,v 1.14 2007/02/21 16:49:05 hargrave Exp $
- * 
+ *
  * Copyright (c) OSGi Alliance (2000, 2007). All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,15 +16,19 @@
  * limitations under the License.
  */
 
+// Port to the D programming language:
+//     Frank Benoit <benoit@tionex.de>
 module org.osgi.framework.ServiceRegistration;
-import org.osgi.framework.ServiceReference;
 
 import java.lang.all;
+
+import org.osgi.framework.ServiceReference; // packageimport
+
 import java.util.Dictionary;
 
 /**
  * A registered service.
- * 
+ *
  * <p>
  * The Framework returns a <code>ServiceRegistration</code> object when a
  * <code>BundleContext.registerService</code> method invocation is successful.
@@ -33,7 +37,7 @@ import java.util.Dictionary;
  * <p>
  * The <code>ServiceRegistration</code> object may be used to update the
  * properties of the service or to unregister the service.
- * 
+ *
  * @see BundleContext#registerService(String[],Object,Dictionary)
  * @ThreadSafe
  * @version $Revision: 1.14 $
@@ -46,7 +50,7 @@ public interface ServiceRegistration {
      * <p>
      * The <code>ServiceReference</code> object may be shared with other
      * bundles.
-     * 
+     *
      * @throws java.lang.IllegalStateException If this
      *         <code>ServiceRegistration</code> object has already been
      *         unregistered.
@@ -56,12 +60,12 @@ public interface ServiceRegistration {
 
     /**
      * Updates the properties associated with a service.
-     * 
+     *
      * <p>
      * The {@link Constants#OBJECTCLASS} and {@link Constants#SERVICE_ID} keys
      * cannot be modified by this method. These values are set by the Framework
      * when the service is registered in the OSGi environment.
-     * 
+     *
      * <p>
      * The following steps are required to modify service properties:
      * <ol>
@@ -69,12 +73,12 @@ public interface ServiceRegistration {
      * <li>A service event of type {@link ServiceEvent#MODIFIED} is
      * fired.
      * </ol>
-     * 
+     *
      * @param properties The properties for this service. See {@link Constants}
      *        for a list of standard service property keys. Changes should not
      *        be made to this object after calling this method. To update the
      *        service's properties this method should be called again.
-     * 
+     *
      * @throws IllegalStateException If this <code>ServiceRegistration</code>
      *         object has already been unregistered.
      * @throws IllegalArgumentException If <code>properties</code> contains
@@ -87,7 +91,7 @@ public interface ServiceRegistration {
      * from the Framework service registry. All <code>ServiceReference</code>
      * objects associated with this <code>ServiceRegistration</code> object
      * can no longer be used to interact with the service.
-     * 
+     *
      * <p>
      * The following steps are required to unregister a service:
      * <ol>
@@ -104,7 +108,7 @@ public interface ServiceRegistration {
      * <code>ServiceFactory.ungetService</code> method is called to release
      * the service object for the bundle.
      * </ol>
-     * 
+     *
      * @throws java.lang.IllegalStateException If this
      *         <code>ServiceRegistration</code> object has already been
      *         unregistered.

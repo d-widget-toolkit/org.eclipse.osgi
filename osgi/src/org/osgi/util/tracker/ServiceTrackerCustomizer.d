@@ -1,8 +1,8 @@
 /*
  * $Header: /cvshome/build/org.osgi.util.tracker/src/org/osgi/util/tracker/ServiceTrackerCustomizer.java,v 1.13 2007/02/19 19:04:33 hargrave Exp $
- * 
+ *
  * Copyright (c) OSGi Alliance (2000, 2007). All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,9 +16,13 @@
  * limitations under the License.
  */
 
+// Port to the D programming language:
+//     Frank Benoit <benoit@tionex.de>
 module org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import java.lang.all;
+
+
 import org.osgi.framework.ServiceReference;
 
 /**
@@ -30,7 +34,7 @@ import org.osgi.framework.ServiceReference;
  * tracked service. The <code>ServiceTrackerCustomizer</code> object is also
  * called when a tracked service is modified or has been removed from the
  * <code>ServiceTracker</code> object.
- * 
+ *
  * <p>
  * The methods in this interface may be called as the result of a
  * <code>ServiceEvent</code> being received by a <code>ServiceTracker</code>
@@ -40,20 +44,20 @@ import org.osgi.framework.ServiceReference;
  * <code>ServiceRegistration.setProperties</code>) or unregister (
  * <code>ServiceRegistration.unregister</code>) a service while being
  * synchronized on any object.
- * 
+ *
  * <p>
  * The <code>ServiceTracker</code> class is thread-safe. It does not call a
  * <code>ServiceTrackerCustomizer</code> object while holding any locks.
  * <code>ServiceTrackerCustomizer</code> implementations must also be
  * thread-safe.
- * 
+ *
  * @ThreadSafe
  * @version $Revision: 1.13 $
  */
 public interface ServiceTrackerCustomizer {
     /**
      * A service is being added to the <code>ServiceTracker</code> object.
-     * 
+     *
      * <p>
      * This method is called before a service which matched the search
      * parameters of the <code>ServiceTracker</code> object is added to it.
@@ -61,7 +65,7 @@ public interface ServiceTrackerCustomizer {
      * <code>ServiceReference</code> object. The returned service object is
      * stored in the <code>ServiceTracker</code> object and is available from
      * the <code>getService</code> and <code>getServices</code> methods.
-     * 
+     *
      * @param reference Reference to service being added to the
      *        <code>ServiceTracker</code> object.
      * @return The service object to be tracked for the
@@ -73,11 +77,11 @@ public interface ServiceTrackerCustomizer {
     /**
      * A service tracked by the <code>ServiceTracker</code> object has been
      * modified.
-     * 
+     *
      * <p>
      * This method is called when a service being tracked by the
      * <code>ServiceTracker</code> object has had it properties modified.
-     * 
+     *
      * @param reference Reference to service that has been modified.
      * @param service The service object for the modified service.
      */
@@ -86,11 +90,11 @@ public interface ServiceTrackerCustomizer {
     /**
      * A service tracked by the <code>ServiceTracker</code> object has been
      * removed.
-     * 
+     *
      * <p>
      * This method is called after a service is no longer being tracked by the
      * <code>ServiceTracker</code> object.
-     * 
+     *
      * @param reference Reference to service that has been removed.
      * @param service The service object for the removed service.
      */

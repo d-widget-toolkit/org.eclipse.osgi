@@ -1,8 +1,8 @@
 /*
  * $Header: /cvshome/build/org.osgi.framework/src/org/osgi/framework/BundleEvent.java,v 1.19 2007/02/20 00:14:12 hargrave Exp $
- * 
+ *
  * Copyright (c) OSGi Alliance (2000, 2007). All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,8 +16,13 @@
  * limitations under the License.
  */
 
+// Port to the D programming language:
+//     Frank Benoit <benoit@tionex.de>
 module org.osgi.framework.BundleEvent;
-import org.osgi.framework.Bundle;
+
+import java.lang.all;
+
+import org.osgi.framework.Bundle; // packageimport
 
 import java.util.EventObject;
 
@@ -28,10 +33,10 @@ import java.util.EventObject;
  * <code>SynchronousBundleListener</code>s and <code>BundleListener</code>s
  * when a change occurs in a bundle's lifecycle. A type code is used to identify
  * the event type for future extendability.
- * 
+ *
  * <p>
  * OSGi Alliance reserves the right to extend the set of types.
- * 
+ *
  * @Immutable
  * @see BundleListener
  * @see SynchronousBundleListener
@@ -54,7 +59,7 @@ public class BundleEvent : EventObject {
      * The bundle has been installed.
      * <p>
      * The value of <code>INSTALLED</code> is 0x00000001.
-     * 
+     *
      * @see BundleContext#installBundle(String)
      */
     public final static int INSTALLED           = 0x00000001;
@@ -67,7 +72,7 @@ public class BundleEvent : EventObject {
      * has been executed if the bundle has a bundle activator class.
      * <p>
      * The value of <code>STARTED</code> is 0x00000002.
-     * 
+     *
      * @see Bundle#start()
      */
     public final static int STARTED             = 0x00000002;
@@ -80,7 +85,7 @@ public class BundleEvent : EventObject {
      * has been executed if the bundle has a bundle activator class.
      * <p>
      * The value of <code>STOPPED</code> is 0x00000004.
-     * 
+     *
      * @see Bundle#stop()
      */
     public final static int STOPPED             = 0x00000004;
@@ -89,7 +94,7 @@ public class BundleEvent : EventObject {
      * The bundle has been updated.
      * <p>
      * The value of <code>UPDATED</code> is 0x00000008.
-     * 
+     *
      * @see Bundle#update()
      */
     public final static int UPDATED             = 0x00000008;
@@ -98,7 +103,7 @@ public class BundleEvent : EventObject {
      * The bundle has been uninstalled.
      * <p>
      * The value of <code>UNINSTALLED</code> is 0x00000010.
-     * 
+     *
      * @see Bundle#uninstall
      */
     public final static int UNINSTALLED         = 0x00000010;
@@ -107,7 +112,7 @@ public class BundleEvent : EventObject {
      * The bundle has been resolved.
      * <p>
      * The value of <code>RESOLVED</code> is 0x00000020.
-     * 
+     *
      * @see Bundle#RESOLVED
      * @since 1.3
      */
@@ -117,7 +122,7 @@ public class BundleEvent : EventObject {
      * The bundle has been unresolved.
      * <p>
      * The value of <code>UNRESOLVED</code> is 0x00000040.
-     * 
+     *
      * @see Bundle#INSTALLED
      * @since 1.3
      */
@@ -133,7 +138,7 @@ public class BundleEvent : EventObject {
      * delivered to <code>BundleListener</code>s.
      * <p>
      * The value of <code>STARTING</code> is 0x00000080.
-     * 
+     *
      * @see Bundle#start()
      * @since 1.3
      */
@@ -149,7 +154,7 @@ public class BundleEvent : EventObject {
      * delivered to <code>BundleListener</code>s.
      * <p>
      * The value of <code>STOPPING</code> is 0x00000100.
-     * 
+     *
      * @see Bundle#stop()
      * @since 1.3
      */
@@ -166,20 +171,20 @@ public class BundleEvent : EventObject {
      * <code>BundleListener</code>s.
      * <p>
      * The value of <code>LAZY_ACTIVATION</code> is 0x00000200.
-     * 
+     *
      * @since 1.4
      */
     public final static int LAZY_ACTIVATION     = 0x00000200;
 
     /**
      * Creates a bundle event of the specified type.
-     * 
+     *
      * @param type The event type.
      * @param bundle The bundle which had a lifecycle change.
      */
 
     public this(int type, Bundle bundle) {
-        super(cast(Object)bundle);
+        super(bundle);
         this.bundle = bundle;
         this.type = type;
     }
@@ -187,7 +192,7 @@ public class BundleEvent : EventObject {
     /**
      * Returns the bundle which had a lifecycle change. This bundle is the
      * source of the event.
-     * 
+     *
      * @return The bundle that had a change occur in its lifecycle.
      */
     public Bundle getBundle() {
@@ -208,7 +213,7 @@ public class BundleEvent : EventObject {
      * <li>{@link #UNRESOLVED}
      * <li>{@link #UNINSTALLED}
      * </ul>
-     * 
+     *
      * @return The type of lifecycle event.
      */
 
